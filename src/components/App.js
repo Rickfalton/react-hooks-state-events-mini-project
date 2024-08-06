@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
-import { CATEGORIES, TASKS } from "../data";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
+import { CATEGORIES, TASKS } from "../data";
 
 function App() {
   const [tasks, setTasks] = useState(TASKS);
   const [category, setCategory] = useState("All");
 
   function handleAddTask(newTask) {
-    setTasks([...tasks, newTask]);
+    setTasks((prevTasks) => [...prevTasks, newTask]); // Use functional update for better performance
   }
 
   function handleDeleteTask(deletedTaskText) {
-    setTasks(tasks.filter((task) => task.text !== deletedTaskText));
+    setTasks((prevTasks) => prevTasks.filter((task) => task.text !== deletedTaskText)); // Use functional update
   }
 
   const visibleTasks = tasks.filter(
     (task) => category === "All" || task.category === category
   );
+
   return (
     <div className="App">
       <h2>My tasks</h2>

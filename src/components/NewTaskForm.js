@@ -11,7 +11,6 @@ function NewTaskForm({ onTaskFormSubmit, categories }) {
     setCategory("Code");
   }
 
-
   return (
     <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
@@ -20,6 +19,7 @@ function NewTaskForm({ onTaskFormSubmit, categories }) {
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          required // Ensure the input is filled out
         />
       </label>
 
@@ -27,10 +27,13 @@ function NewTaskForm({ onTaskFormSubmit, categories }) {
         Category
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           {categories.map((cat) => (
-            <option key={cat}>{cat}</option>
+            <option key={cat} value={cat}> {/* Set value for each option */}
+              {cat}
+            </option>
           ))}
         </select>
       </label>
+
       <input type="submit" value="Add task" />
     </form>
   );
